@@ -1,6 +1,8 @@
 package calculator;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -21,6 +23,22 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("//;\\n1,2:3;4");
             assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_이스케이프_사용(){
+        assertSimpleTest(() -> {
+            run("//\\\\n1,2\\3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 커스텀_구분자_닷_사용(){
+        assertSimpleTest(() -> {
+            run("//.\\n1.2.3.4.5");
+            assertThat(output()).contains("결과 : 15");
         });
     }
 

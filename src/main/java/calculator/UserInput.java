@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.regex.Pattern;
+
 public class UserInput {
     String rawUserInput;
     String customDelimiter;
@@ -18,7 +20,7 @@ public class UserInput {
     private String customDelimiter() {
         if (isCustomDelimiter()) {
             int endIndex = rawUserInput.indexOf("\\n");
-            return rawUserInput.substring("//".length(), endIndex);
+            return Pattern.quote(rawUserInput.substring("//".length(), endIndex));
         }
         return null;
     }
