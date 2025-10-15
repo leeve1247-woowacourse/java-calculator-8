@@ -99,7 +99,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 소숫점_테스트() {
+    void 소수점_테스트() {
         assertSimpleTest(() -> {
             run("1.5,2.5");
             assertThat(output()).contains("결과 : 4.0");
@@ -107,7 +107,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 소숫점_자리_테스트() {
+    void 소수점_자리_테스트() {
         assertSimpleTest(() -> {
             run("1.5,2.50");
             assertThat(output()).contains("결과 : 4.0");
