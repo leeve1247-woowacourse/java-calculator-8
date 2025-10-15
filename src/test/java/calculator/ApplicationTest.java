@@ -17,6 +17,30 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자와_기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("//;\\n1,2:3;4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 기본_구분자_사용() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 빈_문자열_입력() {
+        assertSimpleTest(() -> {
+            run("");
+            assertThat(output()).contains("결과 : 0");
+        });
+    }
+
+    @Test
     void 구분자만_존재() {
         assertSimpleTest(() -> {
             run(",,,,,,,,,,,,,");
@@ -54,6 +78,14 @@ class ApplicationTest extends NsTest {
             run("1.5,2.50");
             assertThat(output()).contains("결과 : 4.0");
         });
+    }
+
+    @Test
+    void 음의_소수_테스트(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("-1.5,2.5"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Override
