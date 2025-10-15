@@ -9,7 +9,7 @@ public class Calculator {
         String regex = "[,:]";
         regex = regex + "|" + userInput.customDelimiter;
         List<BigDecimal> numbers = Arrays.stream(userInput.rawUserInputNumbers.split(regex))
-                .map(Calculator::blankToStringZero)
+                .map(Calculator::stringZeroIfEmpty)
                 .map(BigDecimal::new)
                 .toList();
         validateNegative(numbers);
@@ -17,8 +17,8 @@ public class Calculator {
         return numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private static String blankToStringZero(String rawInput) {
-        if (rawInput.isBlank())
+    private static String stringZeroIfEmpty(String rawInput) {
+        if (rawInput.isEmpty())
             return "0";
         return rawInput;
     }
