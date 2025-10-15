@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringCalculator {
+public class Calculator {
     public BigDecimal calculate(UserInput userInput) {
         String regex = "[,:]";
         regex = regex + "|" + userInput.customDelimiter;
