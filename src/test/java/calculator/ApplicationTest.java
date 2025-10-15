@@ -35,9 +35,25 @@ class ApplicationTest extends NsTest {
     @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> runException("-1,2,3"))
+                        .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 소숫점_테스트() {
+        assertSimpleTest(() -> {
+            run("1.5,2.5");
+            assertThat(output()).contains("결과 : 4.0");
+        });
+    }
+
+    @Test
+    void 소숫점_자리_테스트() {
+        assertSimpleTest(() -> {
+            run("1.5,2.50");
+            assertThat(output()).contains("결과 : 4.0");
+        });
     }
 
     @Override
