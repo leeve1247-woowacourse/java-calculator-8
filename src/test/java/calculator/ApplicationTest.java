@@ -91,6 +91,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 잘못된_숫자표현_테스트(){
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,.,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
     void 소숫점_테스트() {
         assertSimpleTest(() -> {
             run("1.5,2.5");
@@ -112,6 +120,78 @@ class ApplicationTest extends NsTest {
                 assertThatThrownBy(() -> runException("-1.5,2.5"))
                         .isInstanceOf(IllegalArgumentException.class)
         );
+    }
+
+    @Test
+    void 여러자리_숫자_테스트() {
+        assertSimpleTest(() -> {
+            run("10,20:30");
+            assertThat(output()).contains("결과 : 60");
+        });
+    }
+
+    @Test
+    void 연속된_커스텀_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//;\\n1;;2;;;3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 여러문자_커스텀구분자_기본구분자_혼합() {
+        assertSimpleTest(() -> {
+            run("//***\\n1***2,3:4");
+            assertThat(output()).contains("결과 : 10");
+        });
+    }
+
+    @Test
+    void 특수문자_커스텀구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//$^&\\n1$^&2$^&3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 숫자와_공백_혼합_테스트() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(" 1 , 2 : 3 "))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 큰_숫자_테스트() {
+        assertSimpleTest(() -> {
+            run("1000000000,2000000000");
+            assertThat(output()).contains("결과 : 3000000000");
+        });
+    }
+
+    @Test
+    void 소수점_여러자리_테스트() {
+        assertSimpleTest(() -> {
+            run("1.123,2.877");
+            assertThat(output()).contains("결과 : 4.0");
+        });
+    }
+
+    @Test
+    void 공백_커스텀구분자_형식_테스트() {
+        assertSimpleTest(() -> {
+            run("//\\n112");
+            assertThat(output()).contains("결과 : 4");
+        });
+    }
+
+    @Test
+    void 숫자_커스텀_구분자_테스트() {
+        assertSimpleTest(() -> {
+            run("//1\\n112");
+            assertThat(output()).contains("결과 : 2");
+        });
     }
 
     @Override
