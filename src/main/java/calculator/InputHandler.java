@@ -10,8 +10,7 @@ public class InputHandler {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
         String rawUserInput;
         rawUserInput = getNextLine();
-        UserInput userInput = new UserInput(rawUserInput);
-        return userInput;
+        return new UserInput(rawUserInput);
     }
 
     private String getNextLine() {
