@@ -35,6 +35,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 커스텀_구분자_일반_문장_사용(){
+        assertSimpleTest(() -> {
+            run("//a.bc\\n1a.bc2a.bc3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 커스텀_구분자_닷_사용(){
         assertSimpleTest(() -> {
             run("//.\\n1.2.3.4.5");
