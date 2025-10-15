@@ -24,16 +24,18 @@ public class UserInput {
     }
 
     private String rawUserInputNumbers() {
+        String rawUserInputNumbers = rawUserInput;
+
         if (isCustomDelimiter()) {
             int endIndex = rawUserInput.indexOf("\\n");
-            String rawUserInputNumbers = rawUserInput.substring(endIndex + 2);
-            validateUserInputNumbersEmptiness(rawUserInputNumbers);
-            return rawUserInputNumbers;
+            rawUserInputNumbers = rawUserInput.substring(endIndex + 2);
         }
-        return rawUserInput;
+
+        validateUserInputNumbersEmptiness(rawUserInputNumbers);
+        return rawUserInputNumbers;
     }
 
-    private static void validateUserInputNumbersEmptiness(String rawUserInputNumbers) {
+    private void validateUserInputNumbersEmptiness(String rawUserInputNumbers) {
         if (rawUserInputNumbers.isEmpty()) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
