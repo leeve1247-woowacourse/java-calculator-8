@@ -10,14 +10,11 @@ public class StringCalculator {
         regex = regex + "|" + userInput.customDelimiter;
         List<BigDecimal> numbers;
 
-        try {
-            numbers = Arrays.stream(userInput.rawUserInputNumbers.split(regex))
-                    .map(BigDecimal::new)
-                    .toList();
-            validateNegative(numbers);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
+        numbers = Arrays.stream(userInput.rawUserInputNumbers.split(regex))
+                .map(BigDecimal::new)
+                .toList();
+        validateNegative(numbers);
+
         return numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
