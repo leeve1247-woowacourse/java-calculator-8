@@ -31,13 +31,6 @@ public class UserInput {
             rawUserInputNumbers = rawUserInput.substring(endIndex + 2);
         }
 
-        validateUserInputNumbersEmptiness(rawUserInputNumbers);
         return rawUserInputNumbers;
-    }
-
-    private void validateUserInputNumbersEmptiness(String rawUserInputNumbers) {
-        if (rawUserInputNumbers.isEmpty()) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
     }
 }
