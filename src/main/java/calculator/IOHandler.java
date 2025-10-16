@@ -11,9 +11,8 @@ public class IOHandler {
         this.outputHandler = new OutputHandler();
     }
 
-
     public UserInput getUserInput() {
-        return inputHandler.getUserInput();
+        return inputHandler.readUserInput();
     }
 
     public void printResult(BigDecimal userInputNumberSummed) {

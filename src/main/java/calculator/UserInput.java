@@ -1,20 +1,28 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class UserInput {
-    String rawUserInput;
-    String customDelimiter;
-    String rawUserInputNumbers;
+    private final String customDelimiter;
+    private final String rawUserInputNumbers;
 
     public UserInput(String rawUserInput) {
-        this.rawUserInput = rawUserInput;
-        this.customDelimiter = customDelimiter();
-        this.rawUserInputNumbers = rawUserInputNumbers();
+        this.customDelimiter = customDelimiter(rawUserInput);
+        this.rawUserInputNumbers = rawUserInputNumbers(rawUserInput);
     }
 
-    private String customDelimiter() {
-        if (isCustomDelimiter()) {
+    public List<String> getUserInputNumbers(String regex) {
+        return Arrays.stream(rawUserInputNumbers.split(regex)).toList();
+    }
+
+    public String getCustomDelimiter() {
+        return customDelimiter;
+    }
+
+    private String customDelimiter(String rawUserInput) {
+        if (isCustomDelimiter(rawUserInput)) {
             int endIndex = rawUserInput.indexOf("\\n");
             String substring = rawUserInput.substring("//".length(), endIndex);
             validateChar(substring);
@@ -29,10 +37,10 @@ public class UserInput {
         }
     }
 
-    private String rawUserInputNumbers() {
+    private String rawUserInputNumbers(String rawUserInput) {
         String rawUserInputNumbers = rawUserInput;
 
-        if (isCustomDelimiter()) {
+        if (isCustomDelimiter(rawUserInput)) {
             int endIndex = rawUserInput.indexOf("\\n");
             rawUserInputNumbers = rawUserInput.substring(endIndex + 2);
         }
@@ -40,7 +48,7 @@ public class UserInput {
         return rawUserInputNumbers;
     }
 
-    private boolean isCustomDelimiter() {
+    private boolean isCustomDelimiter(String rawUserInput) {
         return rawUserInput != null && rawUserInput.startsWith("//") && rawUserInput.contains("\\n");
     }
 }
