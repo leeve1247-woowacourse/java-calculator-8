@@ -13,10 +13,6 @@ public class UserInput {
         this.rawUserInputNumbers = rawUserInputNumbers();
     }
 
-    private boolean isCustomDelimiter() {
-        return rawUserInput != null && rawUserInput.startsWith("//") && rawUserInput.contains("\\n");
-    }
-
     private String customDelimiter() {
         if (isCustomDelimiter()) {
             int endIndex = rawUserInput.indexOf("\\n");
@@ -34,5 +30,9 @@ public class UserInput {
         }
 
         return rawUserInputNumbers;
+    }
+
+    private boolean isCustomDelimiter() {
+        return rawUserInput != null && rawUserInput.startsWith("//") && rawUserInput.contains("\\n");
     }
 }
