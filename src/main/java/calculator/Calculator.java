@@ -5,6 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Calculator {
+    private static String stringZeroIfEmpty(String rawInput) {
+        if (rawInput.isEmpty()) {
+            return "0";
+        }
+        return rawInput;
+    }
+
     public BigDecimal calculate(UserInput userInput) {
         String regex = "[,:]";
         regex = regex + "|" + userInput.customDelimiter;
@@ -15,12 +22,6 @@ public class Calculator {
         validateNegative(numbers);
 
         return numbers.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    private static String stringZeroIfEmpty(String rawInput) {
-        if (rawInput.isEmpty())
-            return "0";
-        return rawInput;
     }
 
     private void validateNegative(List<BigDecimal> numbers) {

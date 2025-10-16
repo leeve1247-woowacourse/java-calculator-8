@@ -24,7 +24,7 @@ public class UserInput {
     }
 
     private void validateChar(String substring) {
-        if (substring.length() > 1){
+        if (substring.length() > 1) {
             throw new IllegalArgumentException("문자열은 허용되지 않습니다.");
         }
     }

@@ -16,7 +16,7 @@ public class InputHandler {
         String rawUserInput;
         try {
             rawUserInput = readLine();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             rawUserInput = "";
         }
         return rawUserInput;
