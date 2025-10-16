@@ -16,9 +16,17 @@ public class UserInput {
     private String customDelimiter() {
         if (isCustomDelimiter()) {
             int endIndex = rawUserInput.indexOf("\\n");
-            return Pattern.quote(rawUserInput.substring("//".length(), endIndex));
+            String substring = rawUserInput.substring("//".length(), endIndex);
+            validateChar(substring);
+            return Pattern.quote(substring);
         }
         return null;
+    }
+
+    private void validateChar(String substring) {
+        if (substring.length() > 1){
+            throw new IllegalArgumentException("문자열은 허용되지 않습니다.");
+        }
     }
 
     private String rawUserInputNumbers() {
