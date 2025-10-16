@@ -4,12 +4,11 @@ import java.math.BigDecimal;
 
 public class Application {
     public static void main(String[] args) {
-        InputHandler inputHandler = new InputHandler();
-        OutputHandler outputHandler = new OutputHandler();
+        IOHandler ioHandler = new IOHandler();
         Calculator calculator = new Calculator();
 
-        UserInput userInput = inputHandler.getUserInput();
+        UserInput userInput = ioHandler.getUserInput();
         BigDecimal userInputNumberSummed = calculator.calculate(userInput);
-        outputHandler.printResult(userInputNumberSummed);
+        ioHandler.printResult(userInputNumberSummed);
     }
 }
