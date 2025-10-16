@@ -3,7 +3,6 @@ package calculator;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class InputHandler {
     public UserInput getUserInput() {
