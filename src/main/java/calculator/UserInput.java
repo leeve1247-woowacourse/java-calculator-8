@@ -23,12 +23,16 @@ public class UserInput {
 
     private String customDelimiter(String rawUserInput) {
         if (isCustomDelimiter(rawUserInput)) {
-            int endIndex = rawUserInput.indexOf("\\n");
-            String substring = rawUserInput.substring("//".length(), endIndex);
-            validateChar(substring);
-            return Pattern.quote(substring);
+            return extractCustomDelimiter(rawUserInput);
         }
         return null;
+    }
+
+    private String extractCustomDelimiter(String rawUserInput) {
+        int endIndex = rawUserInput.indexOf("\\n");
+        String substring = rawUserInput.substring("//".length(), endIndex);
+        validateChar(substring);
+        return Pattern.quote(substring);
     }
 
     private void validateChar(String substring) {

@@ -1,7 +1,8 @@
-package calculator;
+package calculator.io;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import calculator.UserInput;
 import java.util.NoSuchElementException;
 
 public class InputHandler {

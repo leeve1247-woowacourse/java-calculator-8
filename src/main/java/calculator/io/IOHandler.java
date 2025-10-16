@@ -1,5 +1,6 @@
-package calculator;
+package calculator.io;
 
+import calculator.UserInput;
 import java.math.BigDecimal;
 
 public class IOHandler {
